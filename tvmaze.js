@@ -13,8 +13,8 @@ const $searchForm = $("#searchForm");
  */
 
 async function getShowsByTerm(term) {
-  const response = await fetch(`http://api.tvmaze.com/search/shows?q=${term}`);
-  const data = await response.json();
+  const response = await axios.get(`http://api.tvmaze.com/search/shows?q=${term}`);
+  const data = response.data;
   
   return data.map(item => {
 return {
@@ -76,8 +76,8 @@ $searchForm.on("submit", async function (evt) {
  */
 
 async function getEpisodesOfShow(showId) {
-const response = await fetch(`http://api.tvmaze.com/shows/${showId}/episodes`);
-const episodes = await response.json();
+const response = await axios.get(`http://api.tvmaze.com/shows/${showId}/episodes`);
+const episodes = response.data;
 
 return episodes.map(episode => ({
   id: episode.id,
